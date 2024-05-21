@@ -13,9 +13,21 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   web: ^0.5.1
-  plugin_platform_interface: ^2.0.2
+  plugin_platform_interface: ^2.1.8
   google_mobile_ads: ^5.1.0
-
+  # https://github.com/a14n/dart-decimal
+  rational: ">=2.0.0 <5.0.0"
+  # https://github.com/a14n/dart-decimal
+  decimal: ">=2.0.0 <5.0.0"
+  # https://github.com/dart-lang/crypto
+  crypto: ">=3.0.0 <5.0.0"
+  # https://github.com/dart-lang/convert
+  convert: ">=3.0.0 <5.0.0"
+  # https://github.com/tekartik/synchronized.dart
+  synchronized: '>=3.0.0 <5.0.0'
+  # https://github.com/flutter/plugins/tree/master/packages/path_provider
+  path_provider: '>=2.0.0 <4.0.0'
+  shared_preferences: ^2.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
