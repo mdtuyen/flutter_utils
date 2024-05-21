@@ -14,4 +14,9 @@ class MethodChannelFlutterUtils extends FlutterUtilsPlatform {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+  @override
+  Future getNativeAds() async {
+    await methodChannel.invokeMethod<String>('getNativeAds');
+  }
 }
