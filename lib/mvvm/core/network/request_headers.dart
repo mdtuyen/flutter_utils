@@ -10,7 +10,7 @@ class RequestHeaderInterceptor extends InterceptorsWrapper {
   }
 
   Future<Map<String, String>> getCustomHeaders() async {
-    var customHeaders = {'content-type': 'application/json'};
+    var customHeaders = {'content-type': 'application/json', 'accept': 'application/json'};
 
     return customHeaders;
   }
