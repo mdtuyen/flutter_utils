@@ -49,7 +49,7 @@ class IconTextWidget extends StatelessWidget {
       child: Row(
         children: [
           AssetImageView(
-            fileName: fileName,
+            filePath: fileName,
             height: height,
             width: width,
             color: color,
