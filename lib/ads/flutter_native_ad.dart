@@ -23,7 +23,7 @@ class FlutterNativeAd {
   }
 
   invokeNativeAd({String? nativeVideoID}) async{
-    final methodChannel = MethodChannel("flutter_native_ad");
+    final methodChannel = MethodChannel("flutter_utils");
 
     Map<String, String> nativeID = {"nativeVideoID": nativeVideoID ?? "ca-app-pub-3940256099942544/1044960115"};
     await methodChannel.invokeMethod("getNativeAds",nativeID);
