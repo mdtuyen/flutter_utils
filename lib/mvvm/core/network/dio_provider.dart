@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_utils/mvvm/core/network/pretty_dio_logger.dart';
-import 'package:flutter_utils/mvvm/core/network/request_headers.dart';
 import 'package:flutter_utils/mvvm/flavors/build_config.dart';
 import 'package:flutter_utils/mvvm/flavors/environment.dart';
 
@@ -29,30 +28,16 @@ class DioProvider {
   static Dio get httpDio {
     if (_instance == null) {
       _instance = Dio(_options);
-
-      _instance!.interceptors.add(_prettyDioLogger);
-
-      return _instance!;
     } else {
       _instance!.interceptors.clear();
-      _instance!.interceptors.add(_prettyDioLogger);
-
-      return _instance!;
     }
-  }
-
-  ///returns a Dio client with Access token in header
-  static Dio get tokenClient {
-    _addInterceptors();
-
+    _instance!.interceptors.add(_prettyDioLogger);
     return _instance!;
   }
 
   ///returns a Dio client with Access token in header
-  ///Also adds a token refresh interceptor which retry the request when it's unauthorized
   static Dio get dioWithHeaderToken {
     _addInterceptors();
-
     return _instance!;
   }
 
@@ -62,16 +47,19 @@ class DioProvider {
     _instance!.interceptors.add(RequestHeaderInterceptor());
     _instance!.interceptors.add(_prettyDioLogger);
   }
-
-  static String _buildContentType(String version) {
-    return "user_defined_content_type+$version";
+}
+class RequestHeaderInterceptor extends InterceptorsWrapper {
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    getCustomHeaders().then((customHeaders) {
+      options.headers.addAll(customHeaders);
+      super.onRequest(options, handler);
+    });
   }
 
-  DioProvider.setContentType(String version) {
-    _instance?.options.contentType = _buildContentType(version);
-  }
+  Future<Map<String, String>> getCustomHeaders() async {
+    var customHeaders = {'content-type': 'application/json', 'accept': 'application/json'};
 
-  DioProvider.setContentTypeApplicationJson() {
-    _instance?.options.contentType = "application/json";
+    return customHeaders;
   }
 }
