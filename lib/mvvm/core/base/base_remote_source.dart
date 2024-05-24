@@ -1,13 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_utils/mvvm/core/network/dio_provider.dart';
 import 'package:flutter_utils/mvvm/core/network/error_handlers.dart';
 import 'package:flutter_utils/mvvm/core/network/exceptions/base_exception.dart';
 import 'package:flutter_utils/mvvm/flavors/build_config.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 abstract class BaseRemoteSource {
-  Dio get dioClient => DioProvider.dioWithHeaderToken;
-
   final logger = BuildConfig.instance.config.logger;
 
   Future<Response<T>> callApiWithErrorParser<T>(Future<Response<T>> api) async {
