@@ -51,7 +51,7 @@ class HttpManager extends BaseRemoteSource {
 
   static Dio? _instance;
 
-  static Dio getDio(BaseOptions? options) {
+  static Dio getDio([BaseOptions? options]) {
     if (_instance == null) {
       final optionsDefault = options ??
           BaseOptions(
