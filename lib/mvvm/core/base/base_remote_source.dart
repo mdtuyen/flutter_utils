@@ -9,15 +9,7 @@ abstract class BaseRemoteSource {
 
   Future<Response<T>> callApiWithErrorParser<T>(Future<Response<T>> api) async {
     try {
-      Response<T> response = await api;
-
-      if (response.statusCode != HttpStatus.ok ||
-          (response.data as Map<String, dynamic>)['statusCode'] !=
-              HttpStatus.ok) {
-        // TODO
-      }
-
-      return response;
+      return await api;
     } on DioException catch (dioError) {
       Exception exception = handleDioError(dioError);
       logger.e(
