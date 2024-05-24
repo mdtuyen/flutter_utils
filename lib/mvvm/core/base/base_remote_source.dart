@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_utils/mvvm/core/network/error_handlers.dart';
 import 'package:flutter_utils/mvvm/core/network/exceptions/base_exception.dart';
 import 'package:flutter_utils/mvvm/flavors/build_config.dart';
-import 'package:get/get_connect/http/src/status/http_status.dart';
 
 abstract class BaseRemoteSource {
   final logger = BuildConfig.instance.config.logger;
