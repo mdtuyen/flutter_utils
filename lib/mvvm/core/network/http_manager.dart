@@ -26,7 +26,7 @@ class HttpManager extends BaseRemoteSource {
 
   Future restRequest(
     String url,
-    String method, [
+    String method, {
     Map? headers,
     BaseOptions? options,
     Object? data,
@@ -34,7 +34,7 @@ class HttpManager extends BaseRemoteSource {
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
-  ]) async {
+  }) async {
     final headersDefault = headers?.cast<String, String>() ?? {}
       ..addAll({
         'content-type': 'application/json',
