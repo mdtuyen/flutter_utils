@@ -42,8 +42,13 @@ class HttpManager extends BaseRemoteSource {
       });
     Dio dio = getDio(options);
     try {
-      return callApiWithErrorParser(
-          dio.request(url, options: Options(method: method, headers: headersDefault), data: data));
+      return callApiWithErrorParser(dio.request(url,
+          options: Options(method: method, headers: headersDefault),
+          data: data,
+          queryParameters: queryParameters,
+          cancelToken: cancelToken,
+          onSendProgress: onSendProgress,
+          onReceiveProgress: onReceiveProgress));
     } catch (e) {
       rethrow;
     }
