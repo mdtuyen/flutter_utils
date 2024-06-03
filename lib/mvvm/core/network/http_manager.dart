@@ -61,8 +61,8 @@ class HttpManager extends BaseRemoteSource {
       final optionsDefault = options ??
           BaseOptions(
             baseUrl: baseUrl,
-            connectTimeout: const Duration(seconds: 60),
-            receiveTimeout: const Duration(seconds: 60),
+            connectTimeout:  BuildConfig.instance.config.connectionTimeout,
+            receiveTimeout:  BuildConfig.instance.config.receiveTimeout,
           );
       _instance = Dio(optionsDefault);
     } else {

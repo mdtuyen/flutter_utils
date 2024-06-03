@@ -5,7 +5,6 @@ class EnvConfig {
   final String appName;
   final String baseUrl;
   final Duration receiveTimeout;
-
   final Duration connectionTimeout;
   final bool shouldCollectCrashLog;
 
