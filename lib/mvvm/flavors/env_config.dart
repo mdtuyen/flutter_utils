@@ -1,19 +1,22 @@
 import 'package:flutter_utils/mvvm/core/values/app_values.dart';
 import 'package:logger/logger.dart';
 
-
 class EnvConfig {
   final String appName;
   final String baseUrl;
+  final Duration receiveTimeout;
+
+  final Duration connectionTimeout;
   final bool shouldCollectCrashLog;
 
   late final Logger logger;
 
-  EnvConfig({
-    required this.appName,
-    required this.baseUrl,
-    this.shouldCollectCrashLog = false,
-  }) {
+  EnvConfig(
+      {required this.appName,
+      required this.baseUrl,
+      this.shouldCollectCrashLog = false,
+      this.receiveTimeout = const Duration(milliseconds: 15000),
+      this.connectionTimeout = const Duration(milliseconds: 15000)}) {
     logger = Logger(
       printer: PrettyPrinter(
           methodCount: AppValues.loggerMethodCount,
