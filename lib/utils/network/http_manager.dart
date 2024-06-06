@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:flutter_utils/config/build_config.dart';
 import 'package:flutter_utils/config/environment.dart';
 import 'package:flutter_utils/utils/network/pretty_dio_logger.dart';
 
 import 'base_remote_source.dart';
-
 
 abstract class HttpMethods {
   static const String post = "POST";
@@ -63,8 +65,9 @@ class HttpManager extends BaseRemoteSource {
       final optionsDefault = options ??
           BaseOptions(
             baseUrl: baseUrl,
-            connectTimeout:  BuildConfig.instance.config.connectionTimeout,
-            receiveTimeout:  BuildConfig.instance.config.receiveTimeout,
+            connectTimeout: BuildConfig.instance.config.connectTimeout,
+            sendTimeout: BuildConfig.instance.config.sendTimeout,
+            receiveTimeout: BuildConfig.instance.config.receiveTimeout,
           );
       _instance = Dio(optionsDefault);
     } else {
@@ -73,7 +76,22 @@ class HttpManager extends BaseRemoteSource {
         _instance!.options = options;
       }
     }
-    _instance!.interceptors.add(_prettyDioLogger);
+    if (BuildConfig.isDebug) _instance!.interceptors.add(_prettyDioLogger);
+    if (BuildConfig.instance.config.interceptors?.isNotEmpty ?? false) {
+      _instance!.interceptors
+          .addAll(BuildConfig.instance.config.interceptors as Iterable<Interceptor>);
+    }
+    if (BuildConfig.instance.config.proxy?.isNotEmpty ?? false) {
+      _instance!.httpClientAdapter = IOHttpClientAdapter(createHttpClient: () {
+        final client = HttpClient();
+        client.findProxy = (uri) {
+          return "PROXY ${BuildConfig.instance.config.proxy}";
+        };
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
+        return client;
+      });
+    }
     return _instance!;
   }
 }

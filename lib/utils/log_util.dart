@@ -29,7 +29,7 @@ class LogUtil {
   }
 
   static String _normalPrint(String message) {
-    debugPrint("$message");
+    debugPrint(message);
     return "";
   }
 
