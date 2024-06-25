@@ -17,21 +17,21 @@ dependencies:
   web: ^0.5.1
   plugin_platform_interface: ^2.1.8
   google_mobile_ads: ^5.1.0
-  shared_preferences: ^2.2.3
   dio: ^5.4.3+1
-  dartz: ^0.10.1
   logger: ^2.3.0
   get: ^4.6.6
+  get_storage: ^2.1.1
   get_it: ^7.7.0
-  flutter_easy_permission: ^1.1.2
   flutter_smart_dialog: ^4.9.7+7
   connectivity: ^3.0.6
   flutter_svg: ^2.0.10+1
-  extended_image: ^8.2.1
   json_annotation: ^4.9.0
   json_serializable: ^6.8.0
-  event_bus: ^2.0.0
   flutter_screenutil: ^5.9.3
+  permission_handler: ^11.3.1
+  cached_network_image: ^3.3.1
+  sqflite: ^2.3.3+1
+  in_app_purchase: ^3.2.0
 
 dev_dependencies:
   flutter_test:
