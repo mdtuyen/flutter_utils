@@ -2,13 +2,15 @@ group = "com.pvs.flutter_utils"
 version = "1.0"
 
 buildscript {
+    ext.kotlin_version = '1.9.0'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:7.3.0")
+        classpath "com.android.tools.build:gradle:8.5.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -20,6 +22,7 @@ rootProject.allprojects {
 }
 
 apply plugin: "com.android.library"
+apply plugin: 'kotlin-android'
 
 android {
     if (project.android.hasProperty("namespace")) {
@@ -27,33 +30,27 @@ android {
     }
 
     compileSdk = 34
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
-
     defaultConfig {
         minSdk = 21
     }
-
-    dependencies {
-        testImplementation("junit:junit:4.13.2")
-        testImplementation("org.mockito:mockito-core:5.0.0")
+    lintOptions {
+        disable 'InvalidPackage'
     }
-
-    testOptions {
-        unitTests.all {
-            testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
-               outputs.upToDateWhen {false}
-               showStandardStreams = true
-            }
-        }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.glance:glance-appwidget:1.0.0'
 }

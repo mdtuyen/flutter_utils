@@ -26,11 +26,9 @@ if (flutterVersionName == null) {
 android {
     namespace = "com.pvs.flutter_utils_example"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
@@ -43,7 +41,13 @@ android {
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }
+    buildFeatures {
+        compose true
+    }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.4"
+    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -55,4 +59,10 @@ android {
 
 flutter {
     source = "../.."
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.glance:glance-appwidget:1.0.0'
+    implementation "androidx.work:work-runtime-ktx:2.8.1"
+    implementation "androidx.multidex:multidex:2.0.1"
 }

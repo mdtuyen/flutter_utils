@@ -1,8 +1,5 @@
+library flutter_utils;
 
-import 'flutter_utils_platform_interface.dart';
-
-class FlutterUtils {
-  Future<String?> getPlatformVersion() {
-    return FlutterUtilsPlatform.instance.getPlatformVersion();
-  }
-}
+export 'package:flutter_utils/widget/home_widget/home_widget.dart';
+export 'package:flutter_utils/widget/home_widget/home_widget_callback_dispatcher.dart';
+export 'package:flutter_utils/widget/home_widget/home_widget_info.dart';
